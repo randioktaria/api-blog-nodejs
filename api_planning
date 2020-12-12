@@ -1,0 +1,84 @@
+Standar API
+
+{root.api}/{version}/{grouping}/{endpoint}
+
+SAMPLE:
+http://blog.com/v1/auth/login
+
+Standar Status response
+
+200 - OK                    --> Call API Success
+201 - CREATED               --> Post Success
+400 - BAD REQUEST           --> Error on Cient Side (Bisa input yang salah dll)
+401 - UNAUTHORIZED          --> User not authorized to the request
+403 - FORBIDDEN             --> User not allowed to access
+404 - NOT FOUND             --> Request Endpoint Not Found 
+500 - INTERNAL SERVER ERROR --> Error on server Side
+501 - BAD GATEWAY           --> Invalid Response from another request
+
+GROUP: Authetication
+
+[2] - Register
+{root.api}/{version}/auth/register
+
+req:
+{
+    'name': 'Testing',
+    'email': 'testing@mail.com',
+    'password': '123123'
+}
+
+res:
+{
+    'messsage': 'Register Success',
+    'data': {
+        'id': 1,
+        'name': 'Testing',
+        'email': 'testing@mail.com',
+    }
+}
+
+err-response
+400 -> Input yang anda masukkan tidak valid
+
+
+[1] - Login
+{root.api}/{version}/auth/login
+
+
+GROUP: Blog
+
+[1] - Create Blog Post
+[POST] : {root.api}/{version}/blog/post
+
+req:
+{
+    'title': 'Title Blog',
+    'image': 'imagefile.jpg',
+    'body': 'Mollit id veniam nisi aliqua cillum ex consectetur eiusmod elit nostrud non velit sunt.'
+}
+
+res:
+{
+    'messege': 'Create blog post success',
+    'data': {
+        'id': 1,
+        'title': 'Title Blog',
+        'image': 'imagefile.jpg',
+        'body': 'Mollit id veniam nisi aliqua cillum ex consectetur eiusmod elit nostrud non velit sunt.'
+        'created_at': '12/12/2020',
+        'author': {
+            'id': 1,
+            'nama': 'Test',
+        }
+    }
+}
+
+err-response
+201 -> Blog post berhasil dibuat
+400 -> Input yang anda masukkan tidak valid
+
+
+[2] - Get Blog Post
+[3] - Update Blog Post
+[4] - Delete Blog Post
